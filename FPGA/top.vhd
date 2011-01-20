@@ -72,18 +72,19 @@ signal scale_sch, xn_index, xk_index : std_logic_VECTOR(9 downto 0);
 signal xk_re, xk_im : std_logic_VECTOR(15 downto 0);
 signal ce: std_logic;
 
-type sumbol_buf_type is array (0 to 1151) of std_logic_vector(31 downto 0);
+--type sumbol_buf_type is array (0 to 1151) of std_logic_vector(31 downto 0);
+type sumbol_buf_type is array (0 to 1151) of std_ulogic_vector(31 downto 0);
 signal in_buf_t, in_buf_freq  : sumbol_buf_type;
 signal in_buf_freq_en_a, in_buf_freq_wr, in_buf_freq_en_b : std_logic;
 signal in_buf_freq_adr_wr, in_buf_freq_adr_rd, count  : std_logic_VECTOR(10 downto 0):="00000000000";
 signal data_fft : std_logic_vector(31 downto 0);
 signal find_symbol : std_logic;
 
-type re_im_mux_type is array (0 to 25) of std_logic_vector(15 downto 0);
-type out_mux_type is array (0 to 25) of std_logic_vector(31 downto 0);
+type re_im_mux_type is array (0 to 25) of signed(15 downto 0);
+type out_mux_type is array (0 to 25) of signed(31 downto 0);
 signal re_mux_a, re_mux_b, im_mux_a, im_mux_b  : re_im_mux_type;
 signal out_mux_re, out_mux_im  : out_mux_type;
-signal sum_re, sum_im, sum_re_buf, sum_im_buf, sum_re_max, sum_im_max   : std_logic_vector(36 downto 0);
+signal sum_re, sum_im, sum_re_buf, sum_im_buf, sum_re_max, sum_im_max  : signed(36 downto 0);
 signal conveyer : integer range 0 to 5;
 
 --signal	crc_en : std_logic;
@@ -155,7 +156,7 @@ begin
 	if(rst = '0') then
       if (in_buf_freq_en_a = '1') then
          if (in_buf_freq_wr = '1') then
-            in_buf_freq(conv_integer(in_buf_freq_adr_wr)) <= xk_re & xk_im;
+            in_buf_freq(conv_integer(in_buf_freq_adr_wr)) <= To_StdULogicVector(xk_re & xk_im);
          end if;
       end if;
 	end if;
@@ -167,7 +168,7 @@ begin
    if rising_edge(clk) then
 	if(rst = '0') then
       if (in_buf_freq_en_b = '1') then
-         data_fft <= in_buf_freq(conv_integer(in_buf_freq_adr_rd));
+         data_fft <= To_StdLogicVector(in_buf_freq(conv_integer(in_buf_freq_adr_rd)));
       end if;
 	end if;
    end if;
@@ -188,7 +189,7 @@ begin
 			count_point <= (others => '0');
 		end if;
 		
-		in_buf_t(1151) <= adc_re & adc_im;
+		in_buf_t(1151) <= To_StdULogicVector(adc_re & adc_im);
 		for i in 1 to 1151 loop
 			in_buf_t(i-1)<=in_buf_t(i);
 		end loop;
@@ -234,44 +235,44 @@ begin
 	case conveyer is
 		when 0 => conveyer <= conveyer + 1;
 					for i in 0 to 25 loop
-						re_mux_a(i)<=in_buf_t(i)(31 downto 16);
-						re_mux_b(i)<=in_buf_t(1151-i)(31 downto 16);
+						re_mux_a(i)<=signed(in_buf_t(i)(31 downto 16));
+						re_mux_b(i)<=signed(in_buf_t(1151-i)(31 downto 16));
 		
-						im_mux_a(i)<=in_buf_t(i)(15 downto 0);
-						im_mux_b(i)<=in_buf_t(1151-i)(15 downto 0);
+						im_mux_a(i)<=signed(in_buf_t(i)(15 downto 0));
+						im_mux_b(i)<=signed(in_buf_t(1151-i)(15 downto 0));
 					end loop;
 		when 1 => conveyer <= conveyer + 1;
 					for i in 0 to 25 loop
-						re_mux_a(i)<=in_buf_t(i+1*26)(31 downto 16);
-						re_mux_b(i)<=in_buf_t(1151-i-1*26)(31 downto 16);
+						re_mux_a(i)<=signed(in_buf_t(i+1*26)(31 downto 16));
+						re_mux_b(i)<=signed(in_buf_t(1151-i-1*26)(31 downto 16));
 		
-						im_mux_a(i)<=in_buf_t(i+1*26)(15 downto 0);
-						im_mux_b(i)<=in_buf_t(1151-i-1*26)(15 downto 0);
+						im_mux_a(i)<=signed(in_buf_t(i+1*26)(15 downto 0));
+						im_mux_b(i)<=signed(in_buf_t(1151-i-1*26)(15 downto 0));
 					end loop;
 					
 		when 2 => conveyer <= conveyer + 1;
 					for i in 0 to 25 loop
-						re_mux_a(i)<=in_buf_t(i+2*26)(31 downto 16);
-						re_mux_b(i)<=in_buf_t(1151-i-2*26)(31 downto 16);
+						re_mux_a(i)<=signed(in_buf_t(i+2*26)(31 downto 16));
+						re_mux_b(i)<=signed(in_buf_t(1151-i-2*26)(31 downto 16));
 		
-						im_mux_a(i)<=in_buf_t(i+3*26)(15 downto 0);
-						im_mux_b(i)<=in_buf_t(1151-i-2*26)(15 downto 0);
+						im_mux_a(i)<=signed(in_buf_t(i+3*26)(15 downto 0));
+						im_mux_b(i)<=signed(in_buf_t(1151-i-2*26)(15 downto 0));
 					end loop;
 		when 3 => conveyer <= conveyer + 1;
 					for i in 0 to 25 loop
-						re_mux_a(i)<=in_buf_t(i+3*26)(31 downto 16);
-						re_mux_b(i)<=in_buf_t(1151-i-3*26)(31 downto 16);
+						re_mux_a(i)<=signed(in_buf_t(i+3*26)(31 downto 16));
+						re_mux_b(i)<=signed(in_buf_t(1151-i-3*26)(31 downto 16));
 		
-						im_mux_a(i)<=in_buf_t(i+3*26)(15 downto 0);
-						im_mux_b(i)<=in_buf_t(1151-i-3*26)(15 downto 0);
+						im_mux_a(i)<=signed(in_buf_t(i+3*26)(15 downto 0));
+						im_mux_b(i)<=signed(in_buf_t(1151-i-3*26)(15 downto 0));
 					end loop;
 		when 4 => 
 					for i in 0 to 23 loop
-						re_mux_a(i)<=in_buf_t(i+4*26)(31 downto 16);
-						re_mux_b(i)<=in_buf_t(1151-i-4*26)(31 downto 16);
+						re_mux_a(i)<=signed(in_buf_t(i+4*26)(31 downto 16));
+						re_mux_b(i)<=signed(in_buf_t(1151-i-4*26)(31 downto 16));
 		
-						im_mux_a(i)<=in_buf_t(i+4*26)(15 downto 0);
-						im_mux_b(i)<=in_buf_t(1151-i-4*26)(15 downto 0);
+						im_mux_a(i)<=signed(in_buf_t(i+4*26)(15 downto 0));
+						im_mux_b(i)<=signed(in_buf_t(1151-i-4*26)(15 downto 0));
 					end loop;
 					re_mux_a(24)<=(others => '0'); re_mux_b(24)<=(others => '0');
 					im_mux_a(24)<=(others => '0'); im_mux_b(24)<=(others => '0');

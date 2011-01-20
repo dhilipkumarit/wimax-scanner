@@ -121,10 +121,10 @@ BEGIN
 			  
 			   wait until adc_clk = '1';
 				if (rst = '0') then
-					read (c_file_handle, C) ; adc_re(15 downto 8 ) <= conv_std_logic_vector(character'pos(C),8);
 					read (c_file_handle, C) ; adc_re(7 downto 0 ) <= conv_std_logic_vector(character'pos(C),8);
-					read (c_file_handle, C) ; adc_im(15 downto 8 ) <= conv_std_logic_vector(character'pos(C),8);
+					read (c_file_handle, C) ; adc_re(15 downto 8 ) <= conv_std_logic_vector(character'pos(C),8);
 					read (c_file_handle, C) ; adc_im(7 downto 0 ) <= conv_std_logic_vector(character'pos(C),8);
+					read (c_file_handle, C) ; adc_im(15 downto 8 ) <= conv_std_logic_vector(character'pos(C),8);
 					char_count <= char_count + 1;  -- Keep track of the number of characters
 				end if;
 			end if;

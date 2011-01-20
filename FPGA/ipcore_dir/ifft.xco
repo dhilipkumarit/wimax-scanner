@@ -1,7 +1,7 @@
 ##############################################################
 #
 # Xilinx Core Generator version 12.2
-# Date: Sat Jan 15 21:49:18 2011
+# Date: Thu Jan 20 19:51:27 2011
 #
 ##############################################################
 #
@@ -36,7 +36,7 @@ SELECT Fast_Fourier_Transform family Xilinx,_Inc. 7.1
 # END Select
 # BEGIN Parameters
 CSET butterfly_type=use_luts
-CSET ce=false
+CSET ce=true
 CSET channels=1
 CSET complex_mult_type=use_mults_resources
 CSET component_name=ifft
@@ -58,8 +58,8 @@ CSET run_time_configurable_transform_length=false
 CSET scaling_options=scaled
 CSET sclr=false
 CSET target_clock_frequency=50
-CSET target_data_throughput=12
+CSET target_data_throughput=50
 CSET transform_length=1024
 # END Parameters
 GENERATE
-# CRC: 25a752a6
+# CRC: 1134ea84

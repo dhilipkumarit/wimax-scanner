@@ -33,6 +33,7 @@
 //----------- Begin Cut here for INSTANTIATION Template ---// INST_TAG
 ifft YourInstanceName (
 	.clk(clk),
+	.ce(ce),
 	.start(start),
 	.xn_re(xn_re), // Bus [15 : 0] 
 	.xn_im(xn_im), // Bus [15 : 0] 

@@ -32,6 +32,7 @@
 component ifft
 	port (
 	clk: IN std_logic;
+	ce: IN std_logic;
 	start: IN std_logic;
 	xn_re: IN std_logic_VECTOR(15 downto 0);
 	xn_im: IN std_logic_VECTOR(15 downto 0);
@@ -63,6 +64,7 @@ attribute syn_black_box of ifft: component is true;
 your_instance_name : ifft
 		port map (
 			clk => clk,
+			ce => ce,
 			start => start,
 			xn_re => xn_re,
 			xn_im => xn_im,

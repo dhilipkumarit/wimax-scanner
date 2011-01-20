@@ -49,6 +49,7 @@
    <wvobject fp_name="/top_tb/char_count" type="array" db_ref_id="1">
       <obj_property name="ElementShortName">char_count[31:0]</obj_property>
       <obj_property name="ObjectShortName">char_count[31:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
    </wvobject>
    <wvobject fp_name="/top_tb/clk_period" type="other" db_ref_id="1">
       <obj_property name="ElementShortName">clk_period</obj_property>
@@ -87,35 +88,44 @@
    <wvobject fp_name="/top_tb/uut/conveyer" type="other" db_ref_id="1">
       <obj_property name="ElementShortName">conveyer</obj_property>
       <obj_property name="ObjectShortName">conveyer</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
    </wvobject>
    <wvobject fp_name="/top_tb/uut/sum_re" type="array" db_ref_id="1">
       <obj_property name="ElementShortName">sum_re[36:0]</obj_property>
       <obj_property name="ObjectShortName">sum_re[36:0]</obj_property>
-      <obj_property name="Radix">HEXRADIX</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
    </wvobject>
    <wvobject fp_name="/top_tb/uut/sum_im" type="array" db_ref_id="1">
       <obj_property name="ElementShortName">sum_im[36:0]</obj_property>
       <obj_property name="ObjectShortName">sum_im[36:0]</obj_property>
-      <obj_property name="Radix">HEXRADIX</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
    </wvobject>
    <wvobject fp_name="/top_tb/uut/sum_re_max" type="array" db_ref_id="1">
       <obj_property name="ElementShortName">sum_re_max[36:0]</obj_property>
       <obj_property name="ObjectShortName">sum_re_max[36:0]</obj_property>
-      <obj_property name="Radix">HEXRADIX</obj_property>
+      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ffff00</obj_property>
    </wvobject>
    <wvobject fp_name="/top_tb/uut/sum_im_max" type="array" db_ref_id="1">
       <obj_property name="ElementShortName">sum_im_max[36:0]</obj_property>
       <obj_property name="ObjectShortName">sum_im_max[36:0]</obj_property>
-      <obj_property name="Radix">HEXRADIX</obj_property>
+      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ffff00</obj_property>
    </wvobject>
    <wvobject fp_name="/top_tb/uut/point_re_max" type="array" db_ref_id="1">
       <obj_property name="ElementShortName">point_re_max[15:0]</obj_property>
       <obj_property name="ObjectShortName">point_re_max[15:0]</obj_property>
       <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ffa500</obj_property>
    </wvobject>
    <wvobject fp_name="/top_tb/uut/point_im_max" type="array" db_ref_id="1">
       <obj_property name="ElementShortName">point_im_max[15:0]</obj_property>
       <obj_property name="ObjectShortName">point_im_max[15:0]</obj_property>
       <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ffa500</obj_property>
    </wvobject>
 </wave_config>
